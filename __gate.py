@@ -12,7 +12,7 @@ class BGate(BNet):
         c.append(BGate)
         return tuple(c)
 
-    def __api_hello(self, req):
+    def api_hello(self, req):
         return {'hi':'hi'}
 
     def __handler(self, req):

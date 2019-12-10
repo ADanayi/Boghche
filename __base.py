@@ -33,8 +33,8 @@ class BBase:
     def log(self, msg, a=True, w=False):
         self.__log(self.__name, msg, a, w)
 
-    def boot(self):
+    def boot(self, *args, **kwargs):
         pass
 
-    def load(self):
+    def load(self, *args, **kwargs):
         pass

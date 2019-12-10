@@ -9,3 +9,10 @@ class BBE(BMod):
         c = list(BBE.__base__.get_classes())
         c.append(BBE)
         return tuple(c)
+
+    @property
+    def root(self):
+        return self.__root
+
+    def boot(self, root):
+        self.__root = root

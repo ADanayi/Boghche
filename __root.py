@@ -50,8 +50,8 @@ class BRoot(BBase):
             self.log('Passing Root to Root?!')
             return
         self.__add_to_godies(module)
-        self.__Mod[self.__proc_get_type(module)][module.get_name()] = module
-        self.log('Added module {}.'.format(module.get_name()))
+        self.__Mod[self.__proc_get_type(module)][module.name] = module
+        self.log('Added module {}.'.format(module.name))
 
     def get_mod(self, mod_name):
         for _type, mods in self.__Mod.items():
@@ -68,7 +68,7 @@ class BRoot(BBase):
 
         self.log('\tBEs:')
         for (name, be) in self.__Mod['be'].items():
-            be.boot(self.__app, self)
+            be.boot(self)
 
         self.log('\tGates:')
         for (name, gate) in self.__Mod['gate'].items():
