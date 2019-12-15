@@ -27,9 +27,9 @@ class BBoxer(BNet):
         return self.__Goodies.copy()
 
     def boot(self, app, root):
-        self.log('\t{} >> Booting: '.format(self.name), w=True)
+        self.log1('\t{} >> Booting: '.format(self.name), w=True)
         self.net_boot(app, root)
-        self.log('[Done]', a=True)
+        self.log2('[Done]', a=True)
 
     def add_handler(self, endpoint, handler_function, endpoint_name):
         self.log('\t{} >> Added handler: {} -> {}'.format(self.name, endpoint_name,self.endpoint + endpoint))

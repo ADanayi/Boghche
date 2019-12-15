@@ -1,8 +1,13 @@
+from MyPy import io
+
 def log_default(name, msg, a, w):
     if a is False:
-        print('{} >> {}'.format(name, msg), end = '' if w else '\n')
+        if w is True:
+            print(io.bcolors.WARNING + io.bcolors.BOLD + name + io.bcolors.ENDC + '\t>> {}'.format(msg), end='')
+        else:
+            print(io.bcolors.OKGREEN + io.bcolors.BOLD + msg + io.bcolors.ENDC)
     else:
-        print(msg, end = '' if w else '\n')
+        print(io.bcolors.WARNING + io.bcolors.BOLD + name + io.bcolors.ENDC + '\t>> ' + io.bcolors.WARNING + msg + io.bcolors.ENDC, end='')
 
 import os
 
@@ -31,7 +36,13 @@ class BBase:
         return self.__name
 
     def log(self, msg, a=True, w=False):
-        self.__log(self.__name, msg, a, w)
+        self.__log(self.__name, msg + '\n', a, w)
+
+    def log1(self, msg):
+        self.__log(self.__name, msg, a=False, w=True)
+
+    def log2(self, msg):
+        self.__log(self.__name, msg, a=False, w=False)
 
     def boot(self, *args, **kwargs):
         pass

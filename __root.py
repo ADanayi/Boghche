@@ -62,9 +62,9 @@ class BRoot(BBase):
     def boot(self, import_name):
         self.log('Booting...')
 
-        self.log('Creating the Flask app: ', w=True)
+        self.log1('Creating the Flask app: ')
         self.__app =  Flask(import_name)
-        self.log('[Done]', a=True)
+        self.log2('[Done]')
 
         self.log('\tBEs:')
         for (name, be) in self.__Mod['be'].items():

@@ -23,7 +23,7 @@ class BGate(BNet):
         except:
             return {'status':'error', 'error':'invalid args'}
         if not self.auth(username, password):
-            return {'status':'error', 'error':'unathorized'}
+            return {'status':'error', 'error':'unauthorized'}
         if not t in self.__F:
             try:
                 f = eval('self.api_{}'.format(t), globals(), locals())
@@ -43,7 +43,7 @@ class BGate(BNet):
     def boot(self, app, root):
         global add_to_app_t
         self.net_boot(app, root)
-        self.log('Booting: ', w=True)
+        self.log1('Booting: ')
         add_to_app_t(
             app = self.get_app(),
             endpoint = self.get_endpoint(),
@@ -51,4 +51,4 @@ class BGate(BNet):
             handler = self.__handler,
             fetch_auth=True
         )
-        self.log('[Done]', a=True)
+        self.log2('[Done]')
