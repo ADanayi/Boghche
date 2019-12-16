@@ -19,11 +19,14 @@ class BGate(BNet):
     def api_hello(self, req):
         return {'hi':'hi'}
 
-    def __handler(self, req):
+    def _fetch_type(self, req):
+        return req['type']
+
+    def _handler(self, req):
         try:
             username = req['auth_user'] if self.__needs_auth else None
             password = req['auth_password'] if self.__needs_auth else None
-            t = req['type']
+            t = self._fetch_type(req)
         except:
             return {'status':'error', 'error':'invalid args'}
         if self.__needs_auth and not self.auth(username, password):
@@ -60,7 +63,7 @@ class BGate(BNet):
             app = self.get_app(),
             endpoint = self.get_endpoint(),
             endpoint_name = 'gate::{}'.format(self.get_name()),
-            handler = self.__handler,
+            handler = self._handler,
             fetch_auth=self.__needs_auth
         )
         self.log2('[Done]')
