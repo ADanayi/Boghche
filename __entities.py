@@ -9,7 +9,7 @@ class JSONTOJSONEndpointAction(object):
     def __call__(self, *args):
         req = request.get_json(force=True)
         header = request.headers.get("Authorization")
-        print("Header of request == {}".format(header))
+        # print("Header of request == {}".format(header))
         if req != None:
             return  jsonify(self.action(req))
         else:
@@ -23,7 +23,7 @@ class JSONTOJSONEndpointAction_basicAuth(object):
     def __call__(self, *args):
         req = request.get_json(force=True)
         header = request.headers.get("Authorization")
-        print("Header of request == {}".format(header))
+        # print("Header of request == {}".format(header))
         if header == None:
             return jsonify({'err':'auth error'})
         if req != None:

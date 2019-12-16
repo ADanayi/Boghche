@@ -1,6 +1,9 @@
 from .__net import BNet
 from .__entities import add_to_app_t
 
+import traceback
+
+
 class BGate(BNet):
 
     def __init__(self, name, endpoint, app=None, log_func=None, needs_auth=True):
@@ -29,13 +32,18 @@ class BGate(BNet):
             try:
                 f = eval('self.api_{}'.format(t), globals(), locals())
             except:
+                traceback.print_exc()
                 return {'status':'error', 'error':'invalid type'}
             self.__F[t] = f
         try:
-            ret = self.__F[t](req)
-            ret['status'] = 'ok'
+            ok, result = self.__F[t](req)
+            if ok:
+                ret = {'status':'ok', 'result': result}
+            else:
+                ret = {'status':'error', 'error':'handled error', 'result': result}
             return ret
         except:
+            traceback.print_exc()
             return {'status':'error', 'error':'internal error'}
 
     def auth(self, user_name, password):
