@@ -17,7 +17,7 @@ class BGate(BNet):
         return tuple(c)
 
     def api_hello(self, req):
-        return {'hi':'hi'}
+        return True, {'hi':'hi'}
 
     def _fetch_type(self, req):
         return req['type']

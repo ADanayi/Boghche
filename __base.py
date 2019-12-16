@@ -36,12 +36,18 @@ class BBase:
         return self.__name
 
     def log(self, msg, a=True, w=False):
+        if type(msg) != str:
+            msg = str(msg)
         self.__log(self.__name, msg + '\n', a, w)
 
     def log1(self, msg):
+        if type(msg) != str:
+            msg = str(msg)
         self.__log(self.__name, msg, a=False, w=True)
 
     def log2(self, msg):
+        if type(msg) != str:
+            msg = str(msg)
         self.__log(self.__name, msg, a=False, w=False)
 
     def boot(self, *args, **kwargs):
