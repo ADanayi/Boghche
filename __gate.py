@@ -29,8 +29,14 @@ class BGate(BNet):
             t = self._fetch_type(req)
         except:
             return {'status':'error', 'error':'invalid args'}
-        if self.__needs_auth and not self.auth(username, password):
-            return {'status':'error', 'error':'unauthorized'}
+        if self.__needs_auth:
+            Valid, D = self.auth(username, password)
+            if not Valid:
+                return {'status':'error', 'error':'unauthorized (1)'}
+            else:
+                req['auth'] = D
+                if not self.post_auth(req):
+                    return {'status': 'error', 'error': 'unauthorized (2)'}
         if not t in self.__F:
             try:
                 f = eval('self.api_{}'.format(t), globals(), locals())
@@ -51,10 +57,13 @@ class BGate(BNet):
 
     def auth(self, user_name, password):
         if not self.__needs_auth:
-            return True
+            return True, {}
         else:
             raise Exception('Auth is not implemented')
 
+    def post_auth(self, req):
+        return True
+    
     def boot(self, app, root):
         global add_to_app_t
         self.net_boot(app, root)
